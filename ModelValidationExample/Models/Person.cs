@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using ModelValidationExample.CustomValidators;
 using System.ComponentModel.DataAnnotations;
 
@@ -32,6 +33,7 @@ namespace ModelValidationExample.Models
         public double? Price { get; set; }
 
         [MinimumYearValidator(2005, ErrorMessage = "Year should be larger than {1}")]
+        [BindNever] // except this field
         public DateTime? DateOfBirth { get; set; }        
 
         public DateTime? FromDate { get; set; }
@@ -40,6 +42,8 @@ namespace ModelValidationExample.Models
         public DateTime? ToDate { get; set; }
 
         public int? Age { get; set; }
+
+        public List<string?> Tags { get; set; } = new List<string?>();
 
         public override string ToString()
         {
